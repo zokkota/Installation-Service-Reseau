@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>salut</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<nav id="TOC">
+<ul>
+<li><a href="#rendu-1--préparation-dune-machine-virtuelle-debian"><u>Rendu 1 : Préparation d'une machine virtuelle Debian</u></a><ul>
+<li><a href="#a-notre-avancement-dans-linstallation">A. Notre avancement dans l'installation</a></li>
+<li><a href="#b-réponses-aux-questions">B. Réponses aux questions</a><ul>
+<li><a href="#q1-quelle-est-la-configuration-réseau-utilisée-par-défaut-"><u>Q1: Quelle est la configuration réseau utilisée par défaut ?</u></a></li>
+<li><a href="#q2-quel-est-le-nom-du-fichier-xml-contenant-la-configuration-de-votre-machine-"><ins>Q2: Quel est le nom du fichier XML contenant la configuration de votre machine ?</ins></a></li>
+<li><a href="#q3-quest-ce-que-la-ram-"><ins>Q3: Qu’est-ce que la RAM ?</ins></a></li>
+<li><a href="#q4-quest-ce-que-signifie-64-bits-dans-debian-64-bit-"><ins>Q4: Qu’est-ce que signifie “64-bits” dans “Debian 64-bit” ?</ins></a></li>
+<li><a href="#q5-quest-ce-quun-fichier-iso-bootable-"><ins>Q5: Qu’est-ce qu’un fichier iso bootable ?</ins></a></li>
+<li><a href="#q6-quest-ce-que-mate--gnome-"><ins>Q6: Qu’est-ce que MATE ? GNOME ?</ins></a></li>
+<li><a href="#q7-quest-ce-quun-serveur-web-"><ins>Q7: Qu’est-ce qu’un serveur web ?</ins></a></li>
+<li><a href="#q8-quest-ce-quun-serveur-ssh-"><ins>Q8: Qu’est-ce qu’un serveur ssh ?</ins></a></li>
+<li><a href="#q9-quest-ce-quun-proxy-ou-serveur-mandataire-"><ins>Q9: Qu’est-ce qu’un proxy (ou serveur mandataire) ?</ins></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#rendu-2--préparation-du-système"><u>Rendu 2 : Préparation du système</u></a><ul>
+<li><a href="#a-notre-avancement-dans-linstallation-1">A. Notre avancement dans l'installation</a></li>
+<li><a href="#b-réponses-aux-questions-1">B. Réponses aux questions</a><ul>
+<li><a href="#q1-comment-peux-t-on-savoir-à-quels-groupes-appartient-lutilisateur-user-"><u>Q1: Comment peux-t-on savoir à quels groupes appartient l'utilisateur <em>user</em> ?</u></a></li>
+<li><a href="#q2-à-quoi-servent-les-paquets-installés-"><u>Q2: À quoi servent les paquets installés ?</u></a></li>
+<li><a href="#q3-quel-est-le-noyaux-linux-utilisé-par-votre-vm--comment-lavez-vous-trouvé-"><u>Q3: Quel est le noyaux Linux utilisé par votre VM ? Comment l'avez vous trouvé ?</u></a></li>
+<li><a href="#q4-à-quoi-servent-les-suppléments-invités--donner-2-principales-raisons-de-les-installer"><u>Q4: À quoi servent les suppléments invités ? Donner 2 principales raisons de les installer</u></a></li>
+<li><a href="#q5-à-quoi-sert-la-commande-mount-dans-notre-cas-de-figure-et-dans-le-cas-général-"><u>Q5: À quoi sert la commande <code>mount</code> (dans notre cas de figure et dans le cas général) ?</u></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#rendu-3--sélection-dun-frontend"><u>Rendu 3 : Sélection d'un frontend</u></a><ul>
+<li><a href="#a-notre-avancement-dans-linstallation-2">A. Notre avancement dans l'installation</a></li>
+<li><a href="#b-réponses-aux-questions-2">B. Réponses aux questions</a><ul>
+<li><a href="#q1-que-sont-les-deux-logiciels-gitk-et-git-gui-"><u>Q1: Que sont les deux logiciels gitk et git-gui ?</u></a></li>
+<li><a href="#q2-quelle-commande-avez-vous-utiliser-pour-installer-ces-deux-applications-"><u>Q2: Quelle commande avez-vous utiliser pour installer ces deux applications ?</u></a></li>
+<li><a href="#q3-pourquoi-avez-vous-installé-ce-logiciel-"><u>Q3: Pourquoi avez vous installé ce logiciel ?</u></a></li>
+<li><a href="#q4-comment-lavez-vous-installé-"><u>Q4: Comment l'avez-vous installé ?</u></a></li>
+<li><a href="#q5-comparez-le-à-celui-inclus-avec-git-et-installé-précédemment--fonctionnalités-avantages-inconvénients-"><u>Q5: Comparez-le à celui inclus avec git (et installé précédemment) : fonctionnalités avantages, inconvénients... ?</u></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#rendu-4--installation-de-gitea"><u>Rendu 4 : Installation de Gitea</u></a><ul>
+<li><a href="#a-notre-avancement-dans-linstallation-3">A. Notre avancement dans l'installation</a><ul>
+<li><a href="#installation-de-gitea"><u>Installation de Gitea</u></a></li>
+<li><a href="#utilistation-basique"><u>Utilistation basique</u></a></li>
+<li><a href="#dépôt-de-nos-rapports"><u>Dépôt de nos rapports</u></a></li>
+<li><a href="#les-différents-modes-daccès-réseau-de-virtualbox"><u>Les différents modes d'accès réseau de VirtualBox</u></a></li>
+</ul></li>
+<li><a href="#b-réponses-aux-questions-3">B. Réponses aux questions</a><ul>
+<li><a href="#q1-quest-ce-que-gitea-"><u>Q1: Qu'est-ce que Gitea ?</u></a></li>
+<li><a href="#q2-a-quels-logiciels-bien-connus-dans-ce-domaine-peut-on-le-comparer--citez-en-au-moins-2"><u>Q2: A quels logiciels bien connus dans ce domaine peut-on le comparer ? Citez-en au moins 2.</u></a></li>
+<li><a href="#q3-quest-ce-que-markdown-"><u>Q3: Qu'est-ce que Markdown ?</u></a></li>
+<li><a href="#q4-que-se-passe-t-il--quelle-semble-en-être-la-cause--lors-dun-dépôt-de-projet-existant"><u>Q4: Que se passe-t-il ? Qu'elle semble en être la cause ? (lors d'un dépôt de projet existant)</u></a></li>
+<li><a href="#q5-comparer-gitea-avec-gitweb-et-avec-le-client-graphique-choisi-précédemment"><u>Q5: Comparer Gitea avec gitweb et avec le client graphique choisi précédemment.</u></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="rendu-1--préparation-dune-machine-virtuelle-debian"><u>Rendu 1 : Préparation d'une machine virtuelle Debian</u></h1>
+<h2 id="a-notre-avancement-dans-linstallation">A. Notre avancement dans l'installation</h2>
+<p>Nous n'avons pas rencontré de difficultés particulières lors de l'installation de la machine virtuelle. Nous l'avons chacun installé de notre côté pour pouvoir réaliser chaque tâche et comprendre les mécanismes de la machine virtuelle, tout en nous mettant d'accord lorsqu'il y a des choix techniques à réaliser.</p>
+<p><img src="./Rendu1-res/specifications.png" alt="Spécificité d&#39;une machine" /><br />
+<em>Spécificité d'une des machines et l'environnement de bureau MATE installé</em></p>
+<h2 id="b-réponses-aux-questions">B. Réponses aux questions</h2>
+<h3 id="q1-quelle-est-la-configuration-réseau-utilisée-par-défaut-"><u>Q1: Quelle est la configuration réseau utilisée par défaut ?</u></h3>
+<p>La configuration réseau par défaut de la machine invitée est NAT, ou Network Address Translation. C'est la configuration la plus simple pour que l'invité puisse accéder aux réseaux externes. La machine virtuelle peut communiquer avec Internet ou d'autres réseaux à travers un router, qui est dans ce cas le "VM VirtualBox networking engine" placé entre l'invité et l'hôte.</p>
+<p>Le VM VirtualBox NAT engine reçoit les paquets de la machine invitée, extrait les données de la trame TCP/IP, et l'envoie au système hôte. Pour les autres machines, c'est comme si les données avaient été envoyées de l'application "VM VirtualBox" de la machine hôte avec l'adresse IP de la machine hôte, et non pas de la machine invitée comme c'est le cas. L'engine écoute les réponses aux paquets envoyés, extrait les données et les renvoie vers la machine invitée.</p>
+<p><img src="./Rendu1-res/network-settings.png" alt="Configuration réseau de notre machine" /><br />
+<em>Exemple : configuration de notre machine depuis VM VirtualBox</em></p>
+<blockquote>
+<p>Référence : <a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a></p>
+</blockquote>
+<h3 id="q2-quel-est-le-nom-du-fichier-xml-contenant-la-configuration-de-votre-machine-"><ins>Q2: Quel est le nom du fichier XML contenant la configuration de votre machine ?</ins></h3>
+<p>Le fichier XML qui contient la configuration de la machine se nomme <code>sae203.vbox-pre</code><br />
+Il a un emplacement différent selon le système d'exploitation de la machine hôte, sur Windows dans <code>$HOME\VirtualBox VMs\sae203\sae203.vbox-prev</code><br />
+Par ailleurs, on peut trouver le fichier de configuration globale de VM VirtualBox dans <code>$HOME\.VirtualBox\VirtualBox.xml</code> (sur Windows encore une fois)</p>
+<blockquote>
+<p>Référence : <a href="https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/vboxconfigdata.html">https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/vboxconfigdata.html</a><br />
+<a href="https://www.virtualbox.org/manual/ch08.html#vboxmanage-guestproperty">https://www.virtualbox.org/manual/ch08.html#vboxmanage-guestproperty</a></p>
+</blockquote>
+<h3 id="q3-quest-ce-que-la-ram-"><ins>Q3: Qu’est-ce que la RAM ?</ins></h3>
+<p>La RAM (de l'anglais 'random access memory', souvent traduit en français par 'mémoire vive') est un espace de stockage de données temporaire et rapide. L'ordinateur stocke dans la RAM les données auxquelles il devra avoir accès immédiatement ou très rapidement, à l'inverse d'un disque dur qui stocke les données plus lentement mais plus durablement.</p>
+<p><img src="./Rendu1-res/ram-alocated.png" alt="RAM alouée" /><br />
+<em>Exemple : RAM alouée à notre machine depuis VM VirtualBox</em></p>
+<h3 id="q4-quest-ce-que-signifie-64-bits-dans-debian-64-bit-"><ins>Q4: Qu’est-ce que signifie “64-bits” dans “Debian 64-bit” ?</ins></h3>
+<p>64 bits correspond à la taille des mots binaires manipulés par le processeur.<br />
+Là où un système 32 bits ne peut adresser au maximum une mémoire d'uniquement 2<sup>32</sup> (=4Gio, ~4Go), le système 64 bits peut adresser des mémoires jusqu'à 2<sup>64</sup> (=16Eio*, =Enormément de mémoire ~1.84x10<sup>10</sup>).<br />
+En pratique il permet donc d'utiliser plus de 4Go de RAM (~3.5Go en pratique) pour sa machine.</p>
+<p>*Eio = Exbioctet = 2<sup>60</sup> octets</p>
+<h3 id="q5-quest-ce-quun-fichier-iso-bootable-"><ins>Q5: Qu’est-ce qu’un fichier iso bootable ?</ins></h3>
+<p>Un fichier iso est une représentation, l'image d'un disque à l'identique. Ce format est très utilisé pour partager des fichiers d'installation, en particulier ceux de systèmes d'exploitation car il permet de rassembler tous les fichiers, en conservant leur ordre d'origine, dans un seul et même fichier. Un ISO est une archive, il est donc moins lourd que l'ensemble des fichiers originals.</p>
+<p>Bootable veut dire que l'ordinateur pourra démarrer à partir de cette image ISO, "gravée" sur un support (CD, USB, DD) lui même inséré dans la machine.</p>
+<h3 id="q6-quest-ce-que-mate--gnome-"><ins>Q6: Qu’est-ce que MATE ? GNOME ?</ins></h3>
+<p>MATE et GNOME (acronyme de 'GNU Network Object Model Environment') sont des environnements de bureau. Ils permettent d'utiliser un ordinateur grâce à une interface utilisateur graphique (GUI en anglais).<br />
+Ce sont des ensembles de programmes qui aident l'utilisateur à accéder et gérer les fichiers, tout en faisant l'impasse sur certaines fonctionnalités plus spécifiques de l'ordinateur.<br />
+Ces environnements de bureau sont souvent un ensemble d'icônes, de fenêtres, et souvent un bureau, qui permettent des interactions humain-machine. L'utilisation d'environnement de bureau se fait au détriment des performances maximales de la machine, celle-ci utilisant des ressources pour l'affichage graphique. Sans environnement de bureau, l'ordinateur ne serait utilisable qu'en lignes de commandes, et serait donc beaucoup moins accessible au grand public.</p>
+<p><img src="./Rendu1-res/mate.png" alt="MATE sur notre machine" /><br />
+<em>Exemple : l'environnement de bureau MATE installé sur notre machine</em></p>
+<blockquote>
+<p>Référence : <a href="https://en.wikipedia.org/wiki/Desktop_environment">https://en.wikipedia.org/wiki/Desktop_environment</a></p>
+</blockquote>
+<h3 id="q7-quest-ce-quun-serveur-web-"><ins>Q7: Qu’est-ce qu’un serveur web ?</ins></h3>
+<p>C'est un serveur informatique qui répond à des requêtes du World Wide Web sur un réseau public ou privé, en utilisant principalement le protocole HTTP.</p>
+<p>Un serveur web est soit un logiciel (serveur HTTP pour les ressources web), soit un serveur informatique (ordinateur) qui répond à des requêtes de la toile. Un serveur web utilise principalement le protocole HTTP (Hypertext Transfer Protocol) ou sa variante sécurisée HTTPS (HTTP Secure) pour répondre aux requêtes de clients. Ces requêtes varient et changent la nature des échanges entre le client et le serveur. Par exemple, la méthode GET permet au client de recevoir une ressource demandée, alors que la méthode POST va envoyer des données à une ressource du serveur qui devra les traiter. A chaque fois que le client reçoit une réponse du serveur, elle est accompagné d'un code qui indique comment s'est passé l'échange (par exemple, <code>200 OK</code> indique que tout s'est déroulé comme prévu, alors qu'un code de la forme <code>4XX</code> indique qu'une erreur est survenue. Parmis les plus connues, <code>404 Not Found</code> indique que la ressource n'a pas été trouvée, ou encore <code>418 I'm a teapot</code> indique que le serveur est une théière).</p>
+<p>Un serveur web peut également gérer l'envoi et la réception d'emails grâce à différents protocoles : SMTP (Simple Mail Transfer Protocole) qui est le protocole utilisé pour envoyer les mails entre serveurs, et POP3 (Post Office Protocol) et IMAP (Internet Message Access Protocol) pour récuper les mails du serveur vers le client. POP3 transfert les mails du serveur au client, alors qu'IMAP les copie.</p>
+<p>Enfin, un serveur web peut emettre des flux de diffusion, héberger une base de données ou encore assurer le transfert de fichiers (File Transfer Protocol, FTP).</p>
+<blockquote>
+<p>Références : <a href="https://datatracker.ietf.org/doc/html/rfc7231">HTTP</a><br />
+<a href="https://datatracker.ietf.org/doc/html/rfc2324">HTCPCP</a><br />
+<a href="https://datatracker.ietf.org/doc/html/rfc8314">SMTP</a><br />
+<a href="https://datatracker.ietf.org/doc/html/rfc9051">IMAP</a><br />
+<a href="https://datatracker.ietf.org/doc/html/rfc959">FTP</a></p>
+</blockquote>
+<h3 id="q8-quest-ce-quun-serveur-ssh-"><ins>Q8: Qu’est-ce qu’un serveur ssh ?</ins></h3>
+<p>SSH (secure shell) est un protocole pour sécuriser la connexion entre deux ordinateurs à distance à travers un réseau non sécurisé en encryptant les communications.<br />
+Le protocole SSH fonctionne sur un modèle client/serveur. Une machine (client) qui souhaite se connecter à une autre (hôte) va envoyer une requête qui va être traitée par le serveur SSH de cet hôte.</p>
+<p>Pour ce qui est du fonctionnement de ce protocole, il y a tout d'abord une phase de connexion : le serveur SSH va transmettre au client sa clé publique, preuve que le client communique avec la bonne machine (et non pas un possible pirate qui essayerais d'intercepter la communication).<br />
+Si l'authentification réussie, la machine hôte va donner au client l'accès au système avec les permissions du compte avec lequel il s'est connectée.<br />
+Cette connexion sécurisée peut être utilisée pour de l'administration, de l'exécution de commande, et des transferts de fichiers (SFTP, une version sécurisé du File Transfer Protocole) à distance, parmis beaucoup d'autres utilisations.</p>
+<blockquote>
+<p>Référence : <a href="https://www.ssh.com/academy/ssh/protocol">https://www.ssh.com/academy/ssh/protocol</a></p>
+</blockquote>
+<h3 id="q9-quest-ce-quun-proxy-ou-serveur-mandataire-"><ins>Q9: Qu’est-ce qu’un proxy (ou serveur mandataire) ?</ins></h3>
+<p>Un proxy (serveur mandataire) est quelque chose qui joue le rôle d'intermédiaire entre 2 hôtes pour faciliter et/ou surveiller les échanges.<br />
+C'est un entremetteur qui relaie les requêtes entre deux fonctions, l'une cliente l'autre serveur.</p>
+<p>Un proxy est souvent utilisé comme interface entre un réseau privé et Internet (comme c'est le cas à l'université par exemple). Les machines du réseau privé communiquent d'abord avec le proxy qui va traiter l'information et l'envoyer vers le serveur pour lequel la requête était réellement destiné. Lorsque le proxy reçoit les potentielles réponses, il les renvoie vers la machine du réseau qui avait envoyé une requête. Il n'y a donc pas de communication directe entre le client et le seveur.</p>
+<p>Ainsi, toutes les communications du réseau passent par ce proxy, ce qui permet de sécuriser les communications, de filtrer des requêtes indésirables, de créer un historique des requêtes, parmis d'autres avantages plus techniques.<br />
+De plus, l'accès à des ressources via un proxy permet de contourner certaines règles gouvernementales dans les pays où Internet est censuré, car le proxy fait la requête à la ressource demandée à la place de l'utilisateur.<br />
+Enfin, il existe des proxys à utilisation plus spécifique, comme un proxy DNS qui fait le relais direct en transmettant les requêtes DNS vers un DNS, et peut aussi les mettre en mémoire cache pour les réutiliser.</p>
+<blockquote>
+<p>Référence : <a href="https://en.wikipedia.org/wiki/Proxy_server">https://en.wikipedia.org/wiki/Proxy_server</a></p>
+</blockquote>
+<h1 id="rendu-2--préparation-du-système"><u>Rendu 2 : Préparation du système</u></h1>
+<h2 id="a-notre-avancement-dans-linstallation-1">A. Notre avancement dans l'installation</h2>
+<ul>
+<li><p>Il n'y avait pas de décisions à prendre cette semaine pour le rendu, nous avons tous suivi les étapes de la préparation du système sur nos machines virtuelles en préparation des installations futures.</p></li>
+<li><p>Nous avons installé les différents paquets demandés dans l'énoncé, en plus de certains autres pour améliorer notre confort d'utilisation du système (comme pas exemple VSCodium).</p>
+<p><img src="./Rendu2-res/installed.png" alt="Paquets installés" /><br />
+<em>Quelques paquets que nous avons installé (liste non exhaustive)</em></p></li>
+<li><p>Nous avons bien installé les suppléments invités sur chacunes des machines en utilisant la commande <code>mount</code> sur le CDRom.</p></li>
+<li><p>Finalement, nous avons exporté notre machine virtuelle au format <code>.ova</code> pour pouvoir redémarrer une installation proprement au cas où un problème venait à survenir dans le futur.</p></li>
+</ul>
+<h2 id="b-réponses-aux-questions-1">B. Réponses aux questions</h2>
+<h3 id="q1-comment-peux-t-on-savoir-à-quels-groupes-appartient-lutilisateur-user-"><u>Q1: Comment peux-t-on savoir à quels groupes appartient l'utilisateur <em>user</em> ?</u></h3>
+<p>Pour savoir à quel(s) groupe(s) appartient un utilisateur, on peut utiliser la commande <code>groups</code> en ligne de commande.<br />
+L'utilisation de la commande sans aucun argument affiche le(s) groupe(s) dans le quel l'utilisateur qui execute la commande se trouve.</p>
+<p>Pour connaître les groupes d'autres utilisateurs (par exemple, si on est connecté en tant que <em>root</em> et qu'on veut savoir à quels groupes appartient <em>user</em>, dans le cadre d'administration du système), il suffit d'ajouter le nom de l'utilisateur en argument, et tous les groupes de cet utilisateur seront affichés.</p>
+<p><img src="./Rendu2-res/groups-usage.png" alt="Utilisation de groups" /><br />
+<em>Utilisation de <code>groups</code> connecté en tant que root</em></p>
+<blockquote>
+<p>Référence : <a href="https://www.man7.org/linux/man-pages/man1/groups.1.html">https://www.man7.org/linux/man-pages/man1/groups.1.html</a> ou <code>man groups</code> en ligne de commande.</p>
+</blockquote>
+<h3 id="q2-à-quoi-servent-les-paquets-installés-"><u>Q2: À quoi servent les paquets installés ?</u></h3>
+<p>De nombreux paquets ont installés lors de cette étape. Voici un récapitulatif de ce qu'il font :</p>
+<ul>
+<li><p><code>xterm</code> : émulateur de terminal.</p></li>
+<li><p><code>vim</code> : "VI Improved", un éditeur de texte en ligne de commande.</p></li>
+<li><p><code>curl</code> : outil qui permet de transferrer des données depuis ou vers un serveur en utilisant une URL, et qui supporte un grand nombre de protocoles.</p></li>
+<li><p><code>git</code> : outil de gestion de versions décentralisés.</p></li>
+<li><p><code>sqlite3</code> : gestion d'une base de donnée sqlite en ligne de commande.</p></li>
+<li><p><code>build-essential</code> : ensemble de paquets qui sont nécessaires à la création de fichier .deb (Debian Linux Package File). Ces paquets sont :</p>
+<ul>
+<li><code>libc</code> : librairie standard C</li>
+<li><code>gcc</code> : collection de compilateurs de C et C++</li>
+<li><code>g++</code> : un compilateur de C</li>
+<li><code>make</code> : utilitaire pour compiler un fichier C et/ou un projet C en exécutable.</li>
+<li><code>dpkg-dev</code> et <code>hurd-dev</code></li>
+</ul>
+<p>Exécuter la commande <code>sudo apt install build-essential</code> revient à installer tous ces paquets un à un (déconseillé car ces paquets ont des dépendances les uns envers les autres, il est donc conseillé de les installé dans le cadre de build-essential pour éviter des problèmes de dépendances).</p></li>
+<li><p><code>dkms</code> : accronyme de 'Dynamic Kernel Module Support', c'est un environnement qui permet l'installation de versions supplémentaires des modules du noyau Linux.</p></li>
+<li><p><code>linux-headers</code> : fichiers C qui contiennent de nombreuses fonctions et définitions de structures permettant de compiler des modules du noyau.</p></li>
+</ul>
+<p>De manière générale, on peut penser que l'ensemble des paquets installés ont pour but de mettre en place un environnement de développement en C.</p>
+<blockquote>
+<p>Références :</p>
+<ul>
+<li><code>man xterm</code></li>
+<li><code>man vim</code></li>
+<li><code>man curl</code></li>
+<li><code>man git</code></li>
+<li><code>man sqlite3</code></li>
+<li>liste des paquets fournis avec build-essential trouvable dans <code>/usr/share/build-essential/list</code></li>
+<li><code>man libc</code></li>
+<li><code>man gcc</code></li>
+<li><code>man make</code></li>
+<li><code>man dksm</code></li>
+</ul>
+</blockquote>
+<h3 id="q3-quel-est-le-noyaux-linux-utilisé-par-votre-vm--comment-lavez-vous-trouvé-"><u>Q3: Quel est le noyaux Linux utilisé par votre VM ? Comment l'avez vous trouvé ?</u></h3>
+<p>La commande <code>uname</code> nous permet d'avoir des informations sur le système. Utilisé avec l'option -r, on peut optenir la révision du noyaux Linux utilisé par le système. En plus de ça, on peut optenir la version du noyau et la date de mise à jour avec l'option -v.</p>
+<p><img src="./Rendu2-res/uname.png" alt="utilisation de uname" /><br />
+<em>Affichage des spécificités de la machine avec uname</em></p>
+<blockquote>
+<p>Référence : <a href="https://www.man7.org/linux/man-pages/man1/uname.1.html">https://www.man7.org/linux/man-pages/man1/uname.1.html</a> ou <code>man uname</code></p>
+</blockquote>
+<h3 id="q4-à-quoi-servent-les-suppléments-invités--donner-2-principales-raisons-de-les-installer"><u>Q4: À quoi servent les suppléments invités ? Donner 2 principales raisons de les installer</u></h3>
+<p>Les suppléments invités sont des drivers ou des applications installés sur la machine invitée pour optimiser les performances et la stabilité du système. De plus, ils offrent de nombreuses fonctionnalités qui permettent de faciliter le travail entre la machine hôte et la machine invitée.</p>
+<p>Installer ces suppléments est utile car :</p>
+<ul>
+<li>Ils permettent de faciliter les communications entre l'hôte et l'invité, ce qui permet de contrôler et de surveiller la machine virtuelle depuis la machine physique. Cela permet également d'envoyer des données entre les deux machines (dans les deux sens). Pour permettre cela, VirtualBox établit un canal de communication privé entre l'hôte et l'invité, et les deux peuvent alors envoyer des données dans un sens ou dans l'autre. Ce mécanisme permet également d'obtenir des données sur le système invité, comme le système d'exploitation exact, la version de l'installation des suppléments invités, les utilisateurs qui sont connectés sur le système invité, des statistiques sur les connexions réseaux de la machine, parmis d'autres fonctionnalités.</li>
+<li>Ils permettent de faciliter l'utilisation de la machine virtuelle grâce à plusieurs fonctionnalités : changement de résolution automatique en fonction de la taille de la fenêtre, partage de fichiers et du presse-papier entre les deux machines, et meilleure intégration du pointeur de la souris.</li>
+</ul>
+<p>La liste complète des différents suppléments invités installés sur une machine peut être obtenue en utilisant la commande <code>guestproperty</code> de <code>VBoxManage</code> sur la machine physique.</p>
+<p><img src="./Rendu2-res/guestproperty.png" alt="utilisation de guesproperty" /><br />
+<em>Enumération des suppléments invités installés sur une machine</em></p>
+<blockquote>
+<p>Référence : <a href="https://www.virtualbox.org/manual/ch04.html">https://www.virtualbox.org/manual/ch04.html</a><br />
+<a href="https://www.virtualbox.org/manual/ch08.html#vboxmanage-guestproperty">https://www.virtualbox.org/manual/ch08.html#vboxmanage-guestproperty</a></p>
+</blockquote>
+<h3 id="q5-à-quoi-sert-la-commande-mount-dans-notre-cas-de-figure-et-dans-le-cas-général-"><u>Q5: À quoi sert la commande <code>mount</code> (dans notre cas de figure et dans le cas général) ?</u></h3>
+<ul>
+<li><p>Dans le cas général :<br />
+La commande <code>mount</code> permet d'attacher une partie du système de fichier choisie au système de fichier global de Linux (qui commence par la root /). Cette commande est très utile, surtout dans le cas où le système de fichier est répandu sur plusieurs machines ou à travers un réseau.<br />
+La configuration de base de la commande <code>mount</code> peut être trouvée et modifiée dans le fichier <u>/etc/fstab</u>. Ce fichier précise, lorsque que la commande ne le fait pas, où les fichiers sont généralement attachés et avec quelles options. Cette configuration sera utilisée lorsque la commande <code>mount -a</code> sera executée. En revanche, si l'appareil et le dossier cible sont spécifiés, la commande ne fera pas appel à ce fichier.</p></li>
+<li><p>Dans notre cas de figure :<br />
+La première commande <code>sudo mount /dev/cdrom /mnt</code> a attaché tous les dossiers et fichiers se trouvant dans /dev/cdrom au dossier /mnt du système de fichier de la machine. L'appareil (/dev/cdrom) et le dossier cible (/mnt) on été spécifiés, il n'y a donc pas d'options autres que celles spécifiés par la commande (c'est à dire aucune).<br />
+Puis, <code>sudo /mnt/VBoxLinuxAdditions.run</code> a exécuté le fichier VBoxLinuxAdditions.run, qui se trouve maintenant dans notre architecture de fichier.</p></li>
+</ul>
+<p><img src="./Rendu2-res/wsl-example.png" alt="Exemple avec WSL" /><br />
+<em>Exemple d'utilisation commune de la commande mount avec WSL (Windows Subsystem for Linux) : utilisation de l'architecture de fichier basique de Linux (avec / comme racine), à laquelle l'archtecture de fichier Windows (avec C: comme racine) est attachée avec mount</em></p>
+<blockquote>
+<p>Référence : <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html">https://www.man7.org/linux/man-pages/man8/mount.8.html</a> ou <code>man 8 mount</code></p>
+</blockquote>
+<h1 id="rendu-3--sélection-dun-frontend"><u>Rendu 3 : Sélection d'un frontend</u></h1>
+<h2 id="a-notre-avancement-dans-linstallation-2">A. Notre avancement dans l'installation</h2>
+<p>Pour cette étape :</p>
+<ul>
+<li>Nous avons bien paramétré git comme indiqué dans l'énoncé.</li>
+</ul>
+<p><img src="./Rendu3-res/gitconfig.png" alt="Configuration git" /><br />
+<em>Configuration d'une machine pour utilisation de git.</em></p>
+<ul>
+<li>Nous avons installé les deux paquets gitk et git-gui.</li>
+</ul>
+<p><img src="./Rendu3-res/gitk-gitgui.png" alt="Gitk et git-gui installé" /><br />
+<em>Gitk et git-gui sont installé sur le serveur.</em></p>
+<ul>
+<li>Nous avons choisi GitUI comme interface graphique. <a href="#uq3-pourquoi-avez-vous-installé-ce-logiciel-u">Voir réponses aux questions concernant GitUI.</a></li>
+</ul>
+<p><img src="./Rendu3-res/gituiutilisation.png" alt="utilisation de gitgui" /><br />
+<em>Interface principale de GitUI, directement sur le terminal.</em></p>
+<h2 id="b-réponses-aux-questions-2">B. Réponses aux questions</h2>
+<h3 id="q1-que-sont-les-deux-logiciels-gitk-et-git-gui-"><u>Q1: Que sont les deux logiciels gitk et git-gui ?</u></h3>
+<ul>
+<li><p>gitk permet de naviguer sur un dépôt git. L'utilisation de la commande gitk permet de visualiser plusieurs informations :</p>
+<ul>
+<li>Les changements entre deux commits (ou entre HEAD et un commit)</li>
+<li>Un graph représentant l'historique des commits et les fusions de branches.</li>
+<li>Des informations spécifiques sur un commit : date, numéro, commentaires, auteur des modifications (git blame)</li>
+</ul></li>
+</ul>
+<p><img src="./Rendu3-res/gitk-interface.png" alt="Utilisation de gitk sur notre projet de dev" /><br />
+<em>Utilisation de gitk sur notre projet de développement S2.01-S2.02 : visualisation de changements récents et graphe des changements.</em></p>
+<ul>
+<li>git-gui : c'est une interface graphique de Git (GUI = Graphical User Interface). Celle-ci permet de faire des changements sur le dépôt en créant de nouveaux commits, d'indexer les modifications, de créer de nouvelles branches, de fusionner des branches locales, et permet également de push ou pull les modifications vers/depuis le dépôt.</li>
+</ul>
+<p><img src="./Rendu3-res/git-gui-interface.png" alt="Utilisation de gitgui sur notre projet de dev" /><br />
+<em>Utilisation de git-gui sur notre projet de développement : indexation d'un nouveau fichier avant de le push</em></p>
+<ul>
+<li>En résumé : gitgui se concentre sur la génération de commit, le push/pull, et la gestion du dépôt, alors que gitk donne des informations sur l'historique de celui-ci.</li>
+</ul>
+<blockquote>
+<p>Référence : <a href="https://git-scm.com/docs/gitk/">https://git-scm.com/docs/gitk/</a><br />
+<a href="https://git-scm.com/docs/git-gui">https://git-scm.com/docs/git-gui</a></p>
+</blockquote>
+<h3 id="q2-quelle-commande-avez-vous-utiliser-pour-installer-ces-deux-applications-"><u>Q2: Quelle commande avez-vous utiliser pour installer ces deux applications ?</u></h3>
+<p>Nous avons utilisé les commandes :</p>
+<ul>
+<li><code>sudo apt install gitk</code></li>
+<li><code>sudo apt install git-gui</code></li>
+</ul>
+<p>pour installer respectivement gitk et git-gui.</p>
+<h3 id="q3-pourquoi-avez-vous-installé-ce-logiciel-"><u>Q3: Pourquoi avez vous installé ce logiciel ?</u></h3>
+<p>Comme dit <a href="#a-notre-avancement-dans-linstallation">précédemment</a>, nous avons décidé d'installer GitUI sur notre machine pour comparer différentes interfaces git. GitUI à l'avantage d'être gratuit, et d'être libre de droit (licence MIT : utilisation commerciale, utilisation personnelle, modification et distribution autorisés à condition que la notice de licence et de copyright soit incluse dans toutes les copies).<br />
+De plus, cette interface s'utilise à l'aide du terminal en lançant un fichier exécutable, son installation est donc facile et son utilisation nous ne nous est pas étrangère (même s'il y a des aides).</p>
+<h3 id="q4-comment-lavez-vous-installé-"><u>Q4: Comment l'avez-vous installé ?</u></h3>
+<p>L'installation de GitUI est plutôt facile : l'interface se présente sous un fichier <code>.tar.gz</code>. Il faut le déplacer dans le répertoire qui contient le dépôt git.</p>
+<p>Pour extraire le fichier contenant le logiciel, il suffit d'utiliser la commande <code>tar fxz gitui-linux-musl.tar.gz</code>. Cette commande permet :</p>
+<ul>
+<li>d'utiliser l'utilitaire tar avec <code>tar</code></li>
+<li>d'utiliser un fichier, de l'extraire et de le désarchiver avec <code>fxz</code></li>
+</ul>
+<p>Nous nous retrouvons avec un fichier exécutable appelé <code>gitui</code>.</p>
+<p>Toujours dans le terminal, exécuter le fichier avec <code>./gitui</code> suffit à lancer l'interface graphique dans le terminal et commencer à l'utiliser.</p>
+<p>Attention néanmoins, il est conseillé d'ajouter ce fichier <code>gitgui</code> dans le fichier <code>.gitignore</code> du dépôt git, car c'est un fichier 'personnel' qui n'est sûrement pas utile au développement de l'application du dépôt. A défaut de l'ajouter au fichier, il est recommendé de ne pas l'indexer lors de commit de changements.</p>
+<p>Il est également possible d'ajouter GitUI aux variables d'environnement de Linux pour pouvoir l'exécuter partout sans avoir à inclure l'exécutable dans le dépôt git. C'est ce que nous avons fait.</p>
+<p><img src="./Rendu3-res/gitui-env.png" alt="gitui dans variable env" /><br />
+<em>Nous avons déplacé le script GitUI dans le fichier <code>/usr/bin</code>, pour que l'utilisation de la commande <code>gitui</code> soit disponible partout sur le système : il n'y a plus besoin de d'avoir le fichier gitui dans son dépôt git.</em></p>
+<blockquote>
+<p>Référence : <code>man tar</code><br />
+nos cours de système du premier semestre</p>
+</blockquote>
+<h3 id="q5-comparez-le-à-celui-inclus-avec-git-et-installé-précédemment--fonctionnalités-avantages-inconvénients-"><u>Q5: Comparez-le à celui inclus avec git (et installé précédemment) : fonctionnalités avantages, inconvénients... ?</u></h3>
+<p>Cette interface se rapproche beaucoup plus de git-gui que de gitk, car elle est surtout utile pour indexer des changements, faire des commits, et push/pull le dépôt. Elle ne permet pas de gérer les commits ou d'avoir une visualisation graphique de l'historique des changements.</p>
+<p>L'avantage de cette interface graphique par rapport à git-gui, c'est qu'elle est beaucoup plus pratique à utiliser avec le clavier qu'avec la souris (ce qui est, tout le monde le sait, beaucoup plus rapide). Elle permet également d'avoir plus d'informations sur les commits, même si elle ne remplace pas un graph comme celui disponible avec gitk.</p>
+<p>Néanmoins, un inconvéniant à citer est que la résolution de conflits de fusion est assez compliquée, et il n'y a pas d'aides du tout, seulement un prompt qui nous invite à les résoudres.</p>
+<p><img src="./Rendu3-res/push-on-dev.png" alt="commit script avec guiui" /><br />
+<em>Commit d'un fichier script shell sur la branche 'dev' avec GitUI.</em></p>
+<p><img src="./Rendu3-res/commit-log.png" alt="commit log" /><br />
+<em>Visualisation des commits sur la branche 'dev' : se rapproche de ce que l'on peut trouver avec gitk, mais en plus rudimentaire.</em></p>
+<p><img src="./Rendu3-res/merge.png" alt="merge" /><br />
+<em>Fusion de la branche 'dev' dans la branche 'master' : simplifié grâce à GitUI.</em></p>
+<h1 id="rendu-4--installation-de-gitea"><u>Rendu 4 : Installation de Gitea</u></h1>
+<h2 id="a-notre-avancement-dans-linstallation-3">A. Notre avancement dans l'installation</h2>
+<h3 id="installation-de-gitea"><u>Installation de Gitea</u></h3>
+<p>Nous avons bien installé Gitea en suivant les instructions de la documentation et avec les contraintes imposées.</p>
+<p><img src="./Rendu4-res/wgetgitea.png" alt="wget gitea" /><br />
+<em>Étapes de l'installation de gitea : wget pour obtenir les fichiers binaires, chmod pour le rendre exécutable.</em></p>
+<p><img src="./Rendu4-res/configgitea.png" alt="config initiale gitea" /><br />
+<em>Configuration initiale de Gitea, en utilisant une base de donnée SQLite.</em></p>
+<p><img src="./Rendu4-res/paramadmin.png" alt="config admin" /><br />
+<em>Configuration des paramètres administrateur comme demandé : nom d'utilisateur et adresse email.</em></p>
+<p>Après le suivi de toutes ces étapes, Gitea est installé et utilisable comme n'importe quel autre service Git. Nous avons également installé Gitea en tant que service Linux pour que le service d'hébergement démarre automatique au démarrage du système, indispensable lorsque Gitea est utilisé par de nombreuses personnes.</p>
+<p><img src="./Rendu4-res/linuxservice.png" alt="service linux" /><br />
+<em>Configuration en tant que service Linux</em></p>
+<blockquote>
+<p>Références : <a href="https://docs.gitea.io/en-us/install-from-binary/">https://docs.gitea.io/en-us/install-from-binary/</a> et <a href="https://docs.gitea.io/en-us/linux-service/">https://docs.gitea.io/en-us/linux-service/</a></p>
+</blockquote>
+<h3 id="utilistation-basique"><u>Utilistation basique</u></h3>
+<p>Nous avons créé un nouveau projet vide pour tester le bon fonctionnement de Gitea.</p>
+<p><img src="./Rendu4-res/creanewrepo.png" alt="creation de projet" /><br />
+<em>Création d'une nouveau dépôt avec gitea.</em></p>
+<p><img src="./Rendu4-res/premieremodif.png" alt="modif projet" /><br />
+<em>Modification du fichier README.md en ligne.</em></p>
+<p><img src="./Rendu4-res/commitmodifsonline.png" alt="modifications en ligne" /><br />
+<em>Commit des changements en ligne, le README.md est bien modifié.</em></p>
+<p>Pour ce qui est du dépôt d'un de nos projet existant, voir <a href="#uq4-que-se-passe-t-il--quelle-semble-en-être-la-cause--lors-dun-dépôt-de-projet-existantu">nos réponses à la question 4.</a></p>
+<h3 id="dépôt-de-nos-rapports"><u>Dépôt de nos rapports</u></h3>
+<p>Nous utilisions déjà GitLab pour collaborer sur les fichiers Markdown de nos rapport, nous avons donc décidé de faire un mirroir de notre projet GitLab pour qu'il soit accessible sur les deux services d'hébergement. Voir <a href="#uq4-que-se-passe-t-il--quelle-semble-en-être-la-cause--lors-dun-dépôt-de-projet-existantu">nos réponses à la question 4.</a></p>
+<h3 id="les-différents-modes-daccès-réseau-de-virtualbox"><u>Les différents modes d'accès réseau de VirtualBox</u></h3>
+<p>Nous avons redirigé les ports de notre machine, et Gitea fonctionnait effectivement depuis notre machine physique, ce qui nous a permis de créer un nouveau projet Gitea à partir d'un de nos projets existant.</p>
+<p><img src="./Rendu4-res/portforwarding.png" alt="redirection des ports" /><br />
+<em>Redirection des ports de notre machine.</em></p>
+<p><img src="./Rendu4-res/screengiteasurhote.png" alt="screen gitea sur hote" /><br />
+<em>Gitea est fonctionnel depuis le navigateur de notre machine physique</em></p>
+<h2 id="b-réponses-aux-questions-3">B. Réponses aux questions</h2>
+<h3 id="q1-quest-ce-que-gitea-"><u>Q1: Qu'est-ce que Gitea ?</u></h3>
+<p>Gitea est une plateforme de service Git auto-hébergée, qui a pour but et principe d'être simple d'installation et d'utilisation. Il s'installe grâce à un fichier binaire utilisable sur toutes les plateformes, et écrit en Go. Il propose les même fonctionnalités que les plus gros services d'hébergement Git.</p>
+<blockquote>
+<p>Référence : <a href="https://docs.gitea.io/en-us/">https://docs.gitea.io/en-us/</a></p>
+</blockquote>
+<h3 id="q2-a-quels-logiciels-bien-connus-dans-ce-domaine-peut-on-le-comparer--citez-en-au-moins-2"><u>Q2: A quels logiciels bien connus dans ce domaine peut-on le comparer ? Citez-en au moins 2.</u></h3>
+<p>Gitea est comparable à d'autre plateforme d'hébergement de service Git comme GitHub, GitLab et BitBucket, parmis d'autres moins connus comme Gogs et OneDev (qui est un service d'auto hébergement similaire à Gitea), ou encore GitBucket, qui est également un service d'auto hébergement, mais cette fois-ci utilisable grâce à la Java Virtual Machine, garantissant un service multi-plateforme.</p>
+<h3 id="q3-quest-ce-que-markdown-"><u>Q3: Qu'est-ce que Markdown ?</u></h3>
+<p>Markdown est un langage de balisage léger parmi les plus populaire.</p>
+<p>Il permet d'ajouter des éléments de formattage à un texte simple. Sa lisibilité, sa portabilité et sa versatilité est ce qui rend ce langage très populaire et il est beaucoup utilisé pour réaliser des sites web, des présentations, formatter des emails, réaliser rapidement la documentation d'une application, ou encore de formatter des rendus de projet de réseau. En effet, le Markdown est de base conçu pour être formatté en HTML.</p>
+<p>De plus, grâce à sa nature open source, le Markdown a été enrichi par d'autres projets qui l'ont complété, ou bien enrichi ou modifié son formattage pour exécuter des tâches plus précises. Parmi ces variantes, on peut citer Github Flavored Markdown, qui est l'un des plus populaire grâce à la grande utilisation de Github, ou encore Markdown Extra.</p>
+<p>La popularité du Markdown est des langages de balisage légers a également permis la naissance d'autres projets, comme Pandoc, qui permet de convertir rapidement des fichiers textuels en page HTML par exemple.</p>
+<blockquote>
+<p>Références : <a href="https://en.wikipedia.org/wiki/Markdown">https://en.wikipedia.org/wiki/Markdown</a><br />
+<a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a><br />
+<a href="https://www.markdownguide.org/getting-started/">https://www.markdownguide.org/getting-started/</a></p>
+</blockquote>
+<h3 id="q4-que-se-passe-t-il--quelle-semble-en-être-la-cause--lors-dun-dépôt-de-projet-existant"><u>Q4: Que se passe-t-il ? Qu'elle semble en être la cause ? (lors d'un dépôt de projet existant)</u></h3>
+<p>Pour cette partie, nous avons choisi de tester plusieurs méthodes.<br />
+Tout d'abord, nous allons essayer de push un projet existant depuis notre machine physique vers Gitea.</p>
+<p><img src="./Rendu4-res/erreurterm.png" alt="erreur de la part du terminal" /><br />
+<em>Tentative de clonage d'un dépôt grâce à <code>git clone</code>, mais impossible.</em></p>
+<p>Il nous est impossible de pull quoi que ce soit sur Gitea depuis la machine hôte. A priori, il est possible que cela soit dû au fait que les deux machines soient dans l'impossibilité de communiquer entre elles, ce qui explique que nous ne pouvons pas ajouter nos projets sur Gitea.<br />
+Il est également possible que même si les deux machines communiquent entre elles, la machine hôte n'a pas accès à Gitea.</p>
+<p>Nous avons également décidé d'utiliser la fonctionnalité "migration" inclue avec Gitea. Elle permet de déplacer un dépôt Git hébergé depuis un autre système d'hébergement (Github par exemple) vers Gitea. Il est également possible de faire un miroir de ce dépôt pour qu'il soit accessible à partir des deux plateformes. Nous l'avons fait avec notre dépôt Gitlab que nous utilisons pour collaborer sur les fichiers Markdown qui vous lisez actuellement.</p>
+<p><img src="./Rendu4-res/gitlab-accestoken.png" alt="usitilisation token d&#39;accès" /><br />
+<em>Parce que GitLab est hébergé pour l'Université, et que notre dépôt est privé, nous devons utiliser une token d'accès, pour autoriser gitea à lire le contenu de notre dépôt.</em></p>
+<p><img src="./Rendu4-res/migration.png" alt="migration depuis gitlab" /><br />
+<em>Utilisation du menu de migration depuis Gitea</em></p>
+<p><img src="./Rendu4-res/mirrorddepo.png" alt="c&#39;est bien migré" /><br />
+<em>Lorsque des changements sont push sur le dépôt hébergé sur GitLab, les changements apparaissent également sur Gitea</em></p>
+<p>Alors qu'il nous est (pour l'instant) impossible de créer un nouveau projet à partir d'un de nos projet existant avec la méthode traditionnelle en ligne de commande, la fonctionnalité migration incluse à Gitea fonctionne de base.</p>
+<p><u>Après avoir redirigé les ports (partie 4.4.3) :</u></p>
+<p>Il nous est maintenant possible de créer un projet se basant sur un projet d'une autre ressource qui se trouve sur notre machine physique, car grâce à la rediretion des ports, le service Gitea est accessible depuis la machine hôte.</p>
+<p>Pour ce faire, nous avons utilisé projet0, qui était jusqu'ici uniquement composé d'un fichier README.md, pour ajouter les TDs de développement.</p>
+<p><img src="./Rendu4-res/commitrepoexistant.png" alt="commit des td de dev" /><br />
+<em>Nous indexons les fichiers nouvellement ajoutés.</em></p>
+<p>Au moment de push nos modifications sur Gitea, malgré des messages d'avertissement et un mécontentement de Git Credential Manager, nous réussissons à publier nos changement en ligne.</p>
+<p><img src="./Rendu4-res/pushrepoexistant.png" alt="push des td de dev" /><br />
+<em>Push des nouveaux changements.</em></p>
+<p><img src="./Rendu4-res/projet0update.png" alt="changements sur gitea" /><br />
+<em>Les changements que nous avons fait sont bien visibles sur Gitea.</em></p>
+<blockquote>
+<p>Références : cours de R2.03.</p>
+</blockquote>
+<h3 id="q5-comparer-gitea-avec-gitweb-et-avec-le-client-graphique-choisi-précédemment"><u>Q5: Comparer Gitea avec gitweb et avec le client graphique choisi précédemment.</u></h3>
+<p>Gitweb est l'interface web de base pour les dépôts git. Cette interface est fournie avec git nativement, et peut être utilisée en ligne de commande pour visualiser instantanément un dépôt cloné localement à l'aide d'une interface web (avec la commande <code>git-instaweb</code>).<br />
+Cette interface offre de nombreuses fonctionnalités prêtes à l'emploi, comme la possibilité de voir tous les commits d'un dépôt, voir les différences entre des commits et/ou des branches, voir les changements par commit, etc...</p>
+<p><img src="./Rendu4-res/gitwebsurgtiweb.png" alt="gitweb dans gitweb" /><br />
+<em>Page gitweb sur laquelle est hébergé le développement de gitweb.</em></p>
+<p>Comme on peut le voir sur la capture d'écran ci-dessus, l'interface, bien que complète et fonctionnelle, est assez brut de décoffrage. Comparé à Gitea que nous avons installé plus tôt, il y a beaucoup moins d'éléments graphiques, et aucune aide. Néanmoins, tous les éléments nécessaires à la bonne gestion d'un dépôt git sont présents.</p>
+<p>On peut aussi noter l'absence, comme pour beaucoup d'outils bruts fournis avec git, de fonctionnalités additionnelles qui facilitent l'utilisation, comme une aide au clonage en HTTPS/SSH, la possibilité de modifier des fichiers en ligne, ou encore des outils pour collaborer comme des demandes d'ajout ou des tickets.</p>
+<p>En ce qui concerne notre client graphique, il n'est pas réellement comparable avec Gitea. Alors que Gitea est une interface pour l'hébergement de nombreux dépôts git, GitUI nous aide à gérer un dépôt précis, cloné localement depuis Gitea ou tout autre service d'hébergement git.</p>
+<p>Néanmoins, si nous devions comparer les deux, GitUI serait le plus facile et le plus rapide à utiliser, car étant une interface en ligne de commande, il est possible de tout faire au clavier en l'espace de quelques secondes, ce qui fait gagner beaucoup de temps. Les autres fonctionnalités comme la fusion de branche ou l'inspection des commits est également possible sur les deux plateformes, et encore une fois, il s'agit d'une question de préférence entre utiliser la souris ou le clavier. Pour notre part, nous avons choisi GitUI.</p>
+<blockquote>
+<p>Référence : <a href="https://git-scm.com/docs/gitweb">https://git-scm.com/docs/gitweb</a></p>
+</blockquote>
+</body>
+</html>
